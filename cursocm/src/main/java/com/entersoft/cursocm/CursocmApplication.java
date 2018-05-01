@@ -13,6 +13,7 @@ import com.entersoft.cursocm.domain.Cidade;
 import com.entersoft.cursocm.domain.Cliente;
 import com.entersoft.cursocm.domain.Endereco;
 import com.entersoft.cursocm.domain.Estado;
+import com.entersoft.cursocm.domain.ItemPedido;
 import com.entersoft.cursocm.domain.Pagamento;
 import com.entersoft.cursocm.domain.PagamentoComBoleto;
 import com.entersoft.cursocm.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.entersoft.cursocm.repositories.CidadeRepository;
 import com.entersoft.cursocm.repositories.ClienteRepository;
 import com.entersoft.cursocm.repositories.EnderecoRepository;
 import com.entersoft.cursocm.repositories.EstadoRepository;
+import com.entersoft.cursocm.repositories.ItemPedidoRepository;
 import com.entersoft.cursocm.repositories.PagamentoRepository;
 import com.entersoft.cursocm.repositories.PedidoRepository;
 import com.entersoft.cursocm.repositories.ProdutoRepository;
@@ -56,6 +58,9 @@ public class CursocmApplication implements CommandLineRunner{
 	@Autowired
 	PagamentoRepository pagamentoRepository;
 	
+	@Autowired
+	ItemPedidoRepository itemPedidoRepository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(CursocmApplication.class, args);
 	}
@@ -66,7 +71,7 @@ public class CursocmApplication implements CommandLineRunner{
 		Categoria cat1 = new Categoria(null, "Informatica");
 		Categoria cat2 = new Categoria(null, "Escritório");
 		
-		Produto p1 = new Produto(null, "Computador", 2.000);
+		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
 		Produto p3 = new Produto(null, "Mouse", 80.00);
 		
@@ -119,6 +124,19 @@ public class CursocmApplication implements CommandLineRunner{
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, p1.getPreco());
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, p3.getPreco());
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, p2.getPreco());
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 		
 	}
 }
