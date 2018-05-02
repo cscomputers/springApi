@@ -2,12 +2,15 @@ package com.entersoft.cursocm.services;
 
 import java.util.Optional;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.entersoft.cursocm.domain.Categoria;
 import com.entersoft.cursocm.repositories.CategoriaRepository;
 import com.entersoft.cursocm.services.exceptions.ObjectNotFoundException;
+import com.entersoft.cursocm.services.exceptions.DataIntegrityException;
 
 @Service
 public class CategoriaService {
@@ -28,10 +31,17 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria obj) {
-		if(repo.findById(obj.getId()) == null)
-			return null;
-		
+		find(obj.getId());
 		return repo.save(obj);
+	}
+
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir uma categoria que possui um ou mais produtos");
+		}	
 	}
 	
 }
