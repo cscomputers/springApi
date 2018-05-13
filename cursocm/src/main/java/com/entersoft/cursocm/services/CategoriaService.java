@@ -2,15 +2,14 @@ package com.entersoft.cursocm.services;
 
 import java.util.Optional;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.entersoft.cursocm.domain.Categoria;
 import com.entersoft.cursocm.repositories.CategoriaRepository;
-import com.entersoft.cursocm.services.exceptions.ObjectNotFoundException;
 import com.entersoft.cursocm.services.exceptions.DataIntegrityException;
+import com.entersoft.cursocm.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
