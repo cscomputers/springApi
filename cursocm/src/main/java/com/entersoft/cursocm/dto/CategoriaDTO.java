@@ -2,6 +2,10 @@ package com.entersoft.cursocm.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.entersoft.cursocm.domain.Categoria;
 
 public class CategoriaDTO implements Serializable{
@@ -9,6 +13,9 @@ public class CategoriaDTO implements Serializable{
 	private static final long serialVersionUID = -2250694580252995762L;
 	
 	private Integer id;
+	
+	@NotEmpty(message="O campo nome é obrigatório.")
+	@Length(min=5, max=80, message="O nome deve ser no mínimo 5 e no máximo 80 caracteres.")
 	private String nome;
 	
 	
