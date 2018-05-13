@@ -2,8 +2,8 @@ package com.entersoft.cursocm.domain.enums;
 
 public enum TipoCliente {
 
-	PESSOAFISICA (1, "PessoaFísica"),
-	PESSOAJURIDICA (2, "PessoaJurídica");
+	PESSOA_FISICA (1, "Pessoa Física"),
+	PESSOA_JURIDICA (2, "Pessoa Jurídica");
 	
 	private int cod;
 	private String descricao;
