@@ -2,14 +2,15 @@ package com.entersoft.cursocm.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.entersoft.cursocm.domain.Categoria;
-import com.entersoft.cursocm.dto.CategoriaDTO;
 import com.entersoft.cursocm.repositories.CategoriaRepository;
 import com.entersoft.cursocm.services.exceptions.DataIntegrityException;
 import com.entersoft.cursocm.services.exceptions.ObjectNotFoundException;
@@ -26,10 +27,14 @@ public class CategoriaService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 	
-	public List<CategoriaDTO> findAll() {		
+	public List<Categoria> findAll() {		
 		List<Categoria> lista = repo.findAll();
-		List<CategoriaDTO> listDTO = lista.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
-		return listDTO;
+		return lista;
+	}
+	
+	public Page<Categoria> findPerPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repo.findAll(pageRequest);
 	}
 	
 	public Categoria insert(Categoria obj) {
