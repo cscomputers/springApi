@@ -15,7 +15,7 @@ public class CategoriaDTO implements Serializable{
 	private Integer id;
 	
 	@NotEmpty(message="O campo nome é obrigatório.")
-	@Length(min=5, max=80, message="O nome deve ser no mínimo 5 e no máximo 80 caracteres.")
+	@Length(min=5, max=80, message="O nome deve ter no mínimo 5 e no máximo 80 caracteres.")
 	private String nome;
 	
 	
