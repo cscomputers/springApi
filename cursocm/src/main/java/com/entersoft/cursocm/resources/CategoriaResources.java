@@ -1,6 +1,7 @@
 package com.entersoft.cursocm.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.entersoft.cursocm.domain.Categoria;
+import com.entersoft.cursocm.dto.CategoriaDTO;
 import com.entersoft.cursocm.services.CategoriaService;
 
 @RestController
@@ -22,11 +24,16 @@ public class CategoriaResources {
 	private CategoriaService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
-		
+	public ResponseEntity<Categoria> find(@PathVariable Integer id) {	
 		Categoria obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}	
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<CategoriaDTO>> findAll() {
+		List<CategoriaDTO> lista = service.findAll();
+		return ResponseEntity.ok().body(lista);
+	}
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Categoria obj) {
