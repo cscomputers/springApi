@@ -1,0 +1,5 @@
+package com.entersoft.cursocm.resources.exceptions;
+
+public class ValidationError {
+
+}

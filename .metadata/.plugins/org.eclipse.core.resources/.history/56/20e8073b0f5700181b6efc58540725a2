@@ -1,0 +1,7 @@
+package com.entersoft.cursocm.dto;
+
+import java.io.Serializable;
+
+public class ClienteNewDTO implements Serializable {
+
+}

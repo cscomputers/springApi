@@ -1,0 +1,12 @@
+package com.entersoft.cursocm.dto;
+
+import java.io.Serializable;
+
+public class CategoriaDTO implements Serializable{
+
+	private static final long serialVersionUID = -2250694580252995762L;
+	
+	private Integer id;
+	private String nome;
+
+}

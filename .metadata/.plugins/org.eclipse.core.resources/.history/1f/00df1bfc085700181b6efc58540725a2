@@ -1,0 +1,31 @@
+package com.entersoft.cursocm.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import com.entersoft.cursocm.domain.Categoria;
+import com.entersoft.cursocm.domain.Endereco;
+import com.entersoft.cursocm.repositories.CategoriaRepository;
+import com.entersoft.cursocm.repositories.EnderecoRepository;
+
+public class EnderecoService {
+
+	@Autowired
+	private EnderecoRepository repo;
+	
+	public void saveAll(List<Endereco> list) {
+		if(!list.isEmpty()) {
+			for(Endereco obj : list) {
+				obj.setId(null);
+				repo.save(obj);
+			}
+		}
+	}
+	
+}

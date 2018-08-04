@@ -1,0 +1,11 @@
+package com.entersoft.cursocm.resources.exceptions;
+
+import java.io.Serializable;
+
+public class FieldMessage implements Serializable {
+
+	private static final long serialVersionUID = 5213649444826790951L;
+	
+	
+
+}

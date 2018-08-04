@@ -1,0 +1,5 @@
+package com.entersoft.cursocm.services.exceptions;
+
+public class MethodArgumentNotValidException {
+
+}
